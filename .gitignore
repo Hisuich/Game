@@ -1,2 +1,9 @@
 .idea/
+.settings/
+.gradle/
+gradle/
+out/
+bin/
+build/
 GameServer.iml
+game.iml

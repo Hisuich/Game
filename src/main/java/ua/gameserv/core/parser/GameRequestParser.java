@@ -5,16 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static ua.gameserv.core.parser.CommandConstants.DELIMITER;
+
 public class GameRequestParser {
     private InputStream in;
     private OutputStream out;
-    private Stream<String> request;
     private BufferedReader bufferedReader;
     private List<String> requestList = new ArrayList<>(100);
     private GameRequest gameRequest;
     private final static byte[] ERROR_MSG = "Wrong request format".getBytes();
 
     public GameRequestParser(InputStream in, OutputStream out) throws IOException {
+        this.in = in;
+        this.out = out;
         this.bufferedReader = new BufferedReader(new InputStreamReader(in));
         this.gameRequest = new GameRequest();
         parse();
@@ -31,8 +34,8 @@ public class GameRequestParser {
 
         String versionLine = requestList.get(0);
         String commandLine = requestList.get(1);
-        String[] version = versionLine.split(":");
-        String[] command = commandLine.split(":");
+        String[] version = versionLine.split(DELIMITER);
+        String[] command = commandLine.split(DELIMITER);
         if (!CommandConstants.GAME.equals(version[0])) {
             out.write(ERROR_MSG);
         }
@@ -59,13 +62,13 @@ public class GameRequestParser {
 
     private void initMove() {
         String attackLine = requestList.get(2);
-        String[] attack = attackLine.split(":");
+        String[] attack = attackLine.split(DELIMITER);
         String defenceLine =  requestList.get(3);
-        String[] defence = defenceLine.split(":");
+        String[] defence = defenceLine.split(DELIMITER);
         String dodgeLine =  requestList.get(4);
-        String[] dodge = dodgeLine.split(":");
+        String[] dodge = dodgeLine.split(DELIMITER);
         String recoveryLine =  requestList.get(5);
-        String[] recovery = recoveryLine.split(":");
+        String[] recovery = recoveryLine.split(DELIMITER);
         System.out.println("attack " + attack[1] + "\n" +
                 "defence " + defence[1] + "\n" +
                 "dodge " + dodge[1] + "\n" +
