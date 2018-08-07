@@ -89,7 +89,22 @@ public class Unit {
 		for (Unit unit : playersList)
 			if (unit.isReady == false)
 				return;
-		Unit first = playersList.get(0);
+		
+		if (playersList.size() == 2)
+			for (int i = 0;i < playersList.size();i++) {
+				Unit player = playersList.get(i);
+				Unit enemy = null;
+				
+				for (Unit unit : playersList)
+					if (unit.name != player.name)
+						enemy = unit;
+				
+				player.turn(enemy);
+			}
+		for (Unit unit : playersList)
+			System.out.println(unit.name + " have " + unit.tiredness);
+		
+/*		Unit first = playersList.get(0);
 		Unit second = playersList.get(1);
 		
 		if (!second.isDodge()) {
@@ -124,12 +139,29 @@ public class Unit {
 		
 		first.tiredness += first.recovery * 0.1 + new Random().nextInt(10);
 		second.tiredness += second.recovery * 0.1 + new Random().nextInt(10);
-	}
+*/	}
 	
-	public boolean isDodge() {
+	public boolean isDodge() {		
 		int rand = new Random().nextInt(100);
 		if (rand <= dodge) 
 			return true;
 		return false;
+	}
+	
+	public void turn(Unit target) {
+		
+		if (target.isDodge())
+			System.out.println(target.name + " dodging");
+		else {
+			System.out.println(this.name + " attack " + attack(target.defence));
+			target.tiredness -= attack(target.defence);
+		}
+		
+		if (this.recovery != 0)
+			this.tiredness += this.recovery * 0.1 + new Random().nextInt(this.recovery);
+	}
+	
+	private int attack(int targetDefence) {
+		return this.attack - ((this.attack / targetDefence);
 	}
 }	
