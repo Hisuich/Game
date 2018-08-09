@@ -10,6 +10,7 @@ public class CommandConstants {
     public final static String DEFENCE = "DEFENCE";
     public final static String DODGE = "DODGE";
     public final static String RECOVERY = "RECOVERY";
+    public final static String DELIMITER = ":";
 
     public final static Set<String> commands = new HashSet<>();
 
