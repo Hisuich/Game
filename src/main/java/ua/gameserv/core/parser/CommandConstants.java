@@ -24,6 +24,6 @@ public class CommandConstants {
     }
 
     public enum CommandType {
-        START,MOVE;
+        START,ACTION
     }
 }

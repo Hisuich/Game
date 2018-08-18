@@ -1,14 +1,24 @@
 Registration request:
     GAME:V1
     COMMAND:START
+    ROOM:%s
+    END
+
+Registration response:
+    AUTH:%s
+    ROOM:%s
+    END
 
 Data request:
     GAME:V1
-    COMMAND:DATA
+    COMMAND:ACTION
+    ROOM:%s
+    AUTH:%s
     ATTACK:%d
     DEFENCE:%d
     DODGE:%d
     RECOVER:%d
+    END
 
 1.More Defence less attack
 2.More Evade more attack, less defence

@@ -31,11 +31,14 @@ public class TCPServer {
             System.out.println("Accepted connection: " + socket);
             InputStream in = socket.getInputStream();
             OutputStream out = socket.getOutputStream();
-            GameRequestParser parser = new GameRequestParser(in, out);
-            socket.close();
+            GameRequestParser parser = new GameRequestParser(socket);
+//            socket.shutdownInput();
+            //socket.shutdownOutput();
+            //socket.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e);
+//            e.printStackTrace();
         }
     }
 }
